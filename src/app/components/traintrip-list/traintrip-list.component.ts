@@ -10,7 +10,6 @@ import { interval } from 'rxjs';
 })
 export class TraintripListComponent implements OnInit {
 
-
   traintrips: Traintrip[] = []
 
   constructor(private traintripService: TraintripService) {
