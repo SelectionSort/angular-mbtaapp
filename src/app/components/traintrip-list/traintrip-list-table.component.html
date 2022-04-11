@@ -1,0 +1,27 @@
+<table class="table">
+
+  <thead class="thead-dark">
+  <tr>
+    <th></th>
+    <th>TIME</th>
+    <th>DESTINATION</th>
+    <th>TRAIN#</th>
+    <th>TRACK#</th>
+    <th>STATUS</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let tempTraintrip of traintrips">
+    <td class="align-middle">
+      <img src="{{ tempTraintrip.imageUrl }}" height="50"/>
+    </td>
+    <td class="align-middle">{{ tempTraintrip.depatureTime | date:'h:mm a'}}</td>
+    <td class="align-middle">{{ tempTraintrip.destination}}</td>
+    <td class="align-middle">{{ tempTraintrip.trainNumber}}</td>
+    <td class="align-middle">{{ tempTraintrip.trackNumber}}</td>
+    <td class="align-middle">{{ tempTraintrip.status}}</td>
+  </tr>
+
+  </tbody>
+</table>
