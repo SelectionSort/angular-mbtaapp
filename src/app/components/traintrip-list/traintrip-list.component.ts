@@ -19,7 +19,7 @@ export class TraintripListComponent implements OnInit {
 
 //auto freshing feature
   ngOnInit(): void {
-    interval(1000).subscribe(() => {
+    interval(5000).subscribe(() => {
         this.listTraintrip()
     })
   }

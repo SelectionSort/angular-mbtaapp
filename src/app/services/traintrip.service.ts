@@ -28,6 +28,7 @@ export class TraintripService {
           return results.data.map(data => {
             let train_number = data.relationships.trip.data.id.split('-').slice(-1)[0]
 
+
             let trip_info = results.included.filter((included) => {
               return included.id === data.relationships.trip.data.id
             })[0]
@@ -54,7 +55,7 @@ export class TraintripService {
               'trainNumber': train_number,
               'trackNumber': (track_number) ? track_number : "TBA",
               'status': data.attributes.status,
-              'imageUrl': 'assets/images/traintrips/placeholder.png'
+              'imageUrl': 'assets/images/traintrips/commuter-rail.png'
             }
             return train
 
