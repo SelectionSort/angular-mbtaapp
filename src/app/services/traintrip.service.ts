@@ -28,12 +28,11 @@ export class TraintripService {
           return results.data.map(data => {
             let train_number = data.relationships.trip.data.id.split('-').slice(-1)[0]
 
-
-            let trip_info = results.included.filter((included) => {
+            let trip_data = results.included.filter((included) => {
               return included.id === data.relationships.trip.data.id
             })[0]
 
-            let destination = trip_info.relationships.route.data.id.split('-').slice(-1)[0]
+            let destination = trip_data.relationships.route.data.id.split('-').slice(-1)[0]
 
             let departure_time = results.included.filter((included) => {
               if (included.relationships.trip) {
@@ -49,11 +48,12 @@ export class TraintripService {
               return included.id === data.relationships.stop.data.id
             })[0].attributes.platform_code
 
+            //construct train trip with all the infomation related
             let train: Traintrip = {
               'depatureTime': departure_time,
               'destination': destination,
               'trainNumber': train_number,
-              'trackNumber': (track_number) ? track_number : "TBA",
+              'trackNumber': (track_number) ? track_number : "TBD",
               'status': data.attributes.status,
               'imageUrl': 'assets/images/traintrips/commuter-rail.png'
             }
@@ -62,7 +62,9 @@ export class TraintripService {
             //sort the schedule by departure time
           }).sort((train1: Traintrip, train2: Traintrip) => {
             return train1.depatureTime > train2.depatureTime ? 1 : -1
-          })
+
+            //filter out "Departed" train trip from the array
+          }).filter((train: Traintrip) => train.status !== 'Departed')
         })
       )
   }
